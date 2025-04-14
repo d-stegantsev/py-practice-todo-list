@@ -20,7 +20,13 @@
                   <span class="text-danger">Not done</span>
                 {% endif %}
               </strong>
-              <p>Created: {{ item.created_at }}</p>
+              <p class="small text-muted mb-1">
+                Created: {{ item.created_at }}
+                {% if item.deadline %}
+                  &nbsp; • &nbsp;
+                  <span class="text-danger fw-semibold">Deadline: {{ item.deadline }}</span>
+                {% endif %}
+              </p>
               <p>Tags:
                 {% if item.tags.all %}
                   {% for tag in item.tags.all %}
@@ -33,7 +39,7 @@
               <a href="{% url 'todo:task-update' item.pk %}" class="btn btn-outline-primary btn-sm">
                 Update
               </a>
-            <a href="{% url 'todo:task-delete' item.pk %}" class="btn btn-outline-primary btn-sm">
+              <a href="{% url 'todo:task-delete' item.pk %}" class="btn btn-outline-primary btn-sm">
                 Delete
               </a>
             </div>

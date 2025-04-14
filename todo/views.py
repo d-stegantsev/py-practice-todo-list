@@ -7,7 +7,10 @@ from todo.models import Task, Tag
 
 
 class TaskListView(generic.ListView):
-    queryset = Task.objects.prefetch_related("tags").all().order_by("is_done", "-created_at")
+    queryset = (
+        Task.objects.prefetch_related("tags").all().
+        order_by("is_done", "-created_at")
+    )
     context_object_name = "task_list"
 
 
@@ -59,7 +62,3 @@ class TagUpdateView(generic.UpdateView):
 class TagDeleteView(generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("todo:tag-list")
-
-
-
-
